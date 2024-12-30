@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 const objectId = mongoose.Types.ObjectId;
 
 mongoose.connect("")
+// add mongo path
 
 const userSchema = Schema({
     email: { type: String, unique: true },
