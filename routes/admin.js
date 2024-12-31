@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const adminRouter = Router();
-const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const adminSecret = "heymahavirKaroK$lyan";
+const { adminSecret } = require("../config");
 const bcrypt = require("bcryptjs");
 const { z } = require("zod");
+const { adminMiddleware } = require("../middlewares/admin")
 
 const { adminModel } = require("../db")
 
@@ -92,7 +92,7 @@ adminRouter.post("/signin", async function (req, res) {
 });
 
 
-adminRouter.post("/course", function (req, res) {
+adminRouter.post("/course", adminMiddleware, function (req, res) {
 
 });
 

@@ -1,11 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-const cors = require("cors");
-const jwt = require("jsonwebtoken");
-const secret = "heymahavirKaroK$lyan";
-const bcrypt = require("bcryptjs");
-const { z } = require("zod");
+
 
 app.use(express.json());
 

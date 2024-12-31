@@ -1,10 +1,10 @@
 const { Router, json } = require("express");
 const userRouter = Router();
-const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const secret = "heymahavirKaroK$lyan";
+const { userSecret } = require("../config");
 const bcrypt = require("bcryptjs");
 const { z } = require("zod");
+const { userMiddleware } = require("../middlewares/user")
 
 const { userModel } = require("../db")
 
@@ -79,7 +79,7 @@ userRouter.post("/signin", async function (req, res) {
     if (passwordMatch) {
         const token = jwt.sign({
             id: user._id
-        }, secret);
+        }, userSecret);
         res.json({
             token: token
         })
@@ -92,7 +92,7 @@ userRouter.post("/signin", async function (req, res) {
 });
 
 
-userRouter.get("my-purchase", function (req, res) {
+userRouter.get("my-purchase", userMiddleware, function (req, res) {
 
 })
 
