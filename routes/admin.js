@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const { z } = require("zod");
 const { adminMiddleware } = require("../middlewares/admin")
 
-const { adminModel } = require("../db")
+const { adminModel, courseModel } = require("../db")
 
 
 adminRouter.post("/signup", async function (req, res) {
@@ -92,8 +92,25 @@ adminRouter.post("/signin", async function (req, res) {
 });
 
 
-adminRouter.post("/course", adminMiddleware, function (req, res) {
+adminRouter.post("/course", adminMiddleware, async function (req, res) {
+    const adminId = req.userId;
 
+    const { title, description, price, imageUrl, creatorId } = req.body;
+
+    const coure = await courseModel.create({
+
+        title: String,
+        description: String,
+        price: Number,
+        imageUrl: String,
+        creatorId: adminId
+
+    })
+
+    res.json({
+        message: "Course created.",
+        creatorId: coure._id
+    })
 });
 
 adminRouter.put("/course", function (req, res) {

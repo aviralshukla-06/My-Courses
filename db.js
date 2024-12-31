@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const objectId = mongoose.Types.ObjectId;
+require("dotenv").config();
 
-mongoose.connect("")
+
+mongoose.connect(process.env.MONGO_URL)
 // add mongo path
 
 const userSchema = Schema({
