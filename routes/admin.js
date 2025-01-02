@@ -21,7 +21,6 @@ adminRouter.post("/signup", async function (req, res) {
 
 
     const parsedReqBody = reqBody.safeParse(req.body);
-    // console.log(parsedReqBody);
     const errorMsg = parsedReqBody.error;
 
     if (!parsedReqBody.success) {
@@ -113,7 +112,7 @@ adminRouter.post("/course", adminMiddleware, async function (req, res) {
     })
 });
 
-adminRouter.put("/course", async function (req, res) {
+adminRouter.put("/course", adminMiddleware, async function (req, res) {
     const adminId = req.userId;
 
     const { title, description, price, imageUrl, courseId } = req.body;
@@ -138,12 +137,12 @@ adminRouter.put("/course", async function (req, res) {
 
     res.json({
         message: "Course created.",
-        updatedCourse: course
+        updatedCourse: course._id
     })
 });
 
 
-adminRouter.get("/course", async function (req, res) {
+adminRouter.get("/course", adminMiddleware, async function (req, res) {
     const adminId = req.userId;
 
     const courses = await courseModel.find({
@@ -154,6 +153,9 @@ adminRouter.get("/course", async function (req, res) {
         courses
     })
 })
+
+
+
 
 
 

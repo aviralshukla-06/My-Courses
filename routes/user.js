@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const { z } = require("zod");
 const { userMiddleware } = require("../middlewares/user")
 
-const { userModel } = require("../db")
+const { userModel, purchaseModel, courseModel } = require("../db")
 
 
 userRouter.post("/signup", async function (req, res) {
@@ -92,7 +92,23 @@ userRouter.post("/signin", async function (req, res) {
 });
 
 
-userRouter.get("my-purchase", userMiddleware, function (req, res) {
+
+
+userRouter.get("/my-purchases", userMiddleware, async function (req, res) {
+    const userId = req.userId;
+
+    const purchases = await purchaseModel.find({
+        userId
+    })
+
+    const courses = await courseModel.find({
+        _id: { $in: purchases.map(x => x.courseId) }
+    })
+
+    res.json({
+        purchases,
+        courses
+    })
 
 })
 
