@@ -15,7 +15,7 @@ userRouter.post("/signup", async function (req, res) {
     const reqBody = z.object({
         email: z.string().min(10).max(100).email(),
         password: z.string().min(5).max(100),
-        firstName: z.string().min(5).max(100),
+        firstName: z.string().min(1).max(100),
         lastName: z.string().min(5).max(100)
     })
 
