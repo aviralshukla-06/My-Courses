@@ -27,13 +27,6 @@ courseRouter.post("/purchase", userMiddleware, async function (req, res) {
 })
 
 
-// courseRouter.get("/preview", function (req, res) {
-//     res.json({
-//         message: "Hi there!"
-//     })
-// });
-
-
 
 
 module.exports = {
