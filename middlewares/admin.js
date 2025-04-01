@@ -15,7 +15,7 @@ function adminMiddleware(req, res, next) {
         })
     }
 }
-
+//export the module 
 module.exports = {
     adminMiddleware: adminMiddleware
 }
